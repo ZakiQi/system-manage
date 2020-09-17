@@ -1,11 +1,10 @@
 <template>
   <div id="Main">
-    <i class="iconfont iconjiahao"></i>
-    <i class="iconfont">&#xe608;</i>
-    <div id="nav">
+    <!--<div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">about</router-link>
     </div>
+    -->
     <router-view/>
   </div>
 </template>
@@ -28,7 +27,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 
 @import url('../../assets/font/iconfont.css');
