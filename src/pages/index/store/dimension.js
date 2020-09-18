@@ -16,6 +16,15 @@ export default {
       }).then(data => {
         return data
       })
+    },
+
+    getRoleData ({ commit }, payoad = {}) {
+      return API.get({
+        url: '/data/roleData',
+        data: payoad
+      }).then(data => {
+        return data
+      })
     }
   }
 }
