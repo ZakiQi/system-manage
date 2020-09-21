@@ -1,33 +1,44 @@
 <template>
   <div class="role-main">
+    <!-- 头部搜索 -->
     <div class="role-top-search">
-       <a-input-search placeholder="请输入关键字搜索" style="width: 300px" @search="onSearch" />
+       <a-input-search placeholder="请输入关键字搜索" style="width: 300px" v-model="searchVal" @search="onSearch" />
     </div>
+    <!-- 表格内容 -->
     <div class="role-table-content">
       <a-table
         :columns="columns"
         :pagination="false"
-        :data-source="data"
-        :row-key="record => record.number"
+        :data-source="roleData"
+        :row-key="record => record.number + '_' + record.roleNumber"
         :scroll="{ y: selfHeight }">
+        <!-- 描述 -->
         <template slot="describe" slot-scope="key, scope">
           <span :title="scope.describe">{{scope.describe}}</span>
         </template>
-        <template slot="operate">
-          <a href="#" class="iconfont iconjiahao edit-role"></a>
+        <!-- 操作栏 -->
+        <template slot="operate" slot-scope="key, scope">
+          <a class="iconfont icon-icon-test7 edit-role" @click="editRole(scope)"></a>
         </template>
       </a-table>
     </div>
+    <!-- 分页 -->
     <div class="role-pagination">
       <a-pagination show-quick-jumper size="small" :default-current="2" :total="500" @change="onChange" />
     </div>
+    <edit-modal :visible.sync="modalVisible" :editInfo="editInfo" @updateRole="updateRole"></edit-modal>
   </div>
 </template>
 
 <script>
+
+import editModal from './editModal'
 export default {
   data () {
     return {
+      modalVisible: false,
+      searchVal: '',
+      editInfo: {},
       selfHeight: 40,
       columns: [{
         title: '序号',
@@ -61,8 +72,12 @@ export default {
         key: 'operate',
         scopedSlots: { customRender: 'operate' }
       }],
-      data: []
+      roleData: []
     }
+  },
+
+  components: {
+    editModal
   },
 
   computed: {
@@ -81,17 +96,45 @@ export default {
         tableContent && (this.selfHeight = tableContent.offsetHeight - 48)
       })
     },
-    onSearch () {
-      console.log(123123)
+
+    editRole (scope) {
+      this.modalVisible = true
+      this.editInfo = scope
     },
-    onChange () {
+
+    /**
+     * @description 获取角色数据
+     */
+    getRoleInfo (params) {
+      this.$store.dispatch('Dimension/getRoleData', params).then(e => {
+        console.log(e, 'e')
+        this.roleData = e
+      })
+    },
+
+    /**
+     * @description 角色查询
+     */
+    onSearch () {
+      this.getRoleInfo({ keywork: this.searchVal })
+    },
+
+    onChange (val) {
+      const params = { page: val }
+      this.searchVal && (params.keywork = this.searchVal)
+      this.getRoleInfo(params)
+    },
+
+    // 更新角色编辑信息
+    updateRole (data) {
+      for (const key in data) {
+        this.$set(this.editInfo, key, data[key])
+      }
     }
   },
 
   created () {
-    this.$store.dispatch('Dimension/getRoleData').then(e => {
-      this.data = e
-    })
+    this.getRoleInfo()
   },
 
   mounted () {
@@ -135,7 +178,7 @@ export default {
   }
 
   .edit-role{
-    font-size:14px;
+    font-size:16px;
   }
 
   .role-pagination{

@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import axios from 'axios'
 
-import Message from 'ant-design-vue/lib/message';
+import Message from 'ant-design-vue/lib/message'
 
-import 'ant-design-vue/dist/antd.css';
+import 'ant-design-vue/dist/antd.css'
 import config from './config'
 
-let service = axios.create({
+const service = axios.create({
   baseURL: config.baseURL,
   timeout: 60000
 })
@@ -19,8 +19,8 @@ service.interceptors.request.use(
     return config
   },
   (error) => {
-     // 请求错误处理
-     return Promise.reject(error)
+    // 请求错误处理
+    return Promise.reject(error)
   }
 )
 
@@ -28,16 +28,14 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   (response) => {
     if (response && response.status === 200) {
-      let { data } = response
+      const { data } = response
       return data
     } else {
       Message.error('error')
     }
   },
   (_error) => {
-    
     Message.error('error')
-    
   }
 )
 
@@ -62,11 +60,13 @@ service.get = async (config) => {
  * @param {object} config 请求参数对象
  * @returns {Promise<AxiosResponse<any>>}
  */
-service.post= async (config) => {
-  config.data = Object.assign(config.data,  {method: 'POST'})
+service.post = async (config) => {
+  config.data = Object.assign(config.data)
+  delete config.data
 
-  const result = await service.service(config)
-  
+  const result = await service(Object.assign({
+    method: 'POST'
+  }, config))
   return result
 }
 

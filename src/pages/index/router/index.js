@@ -19,7 +19,7 @@ const routes = [
   }, {
     path: '/roleManage',
     name: 'roleManage',
-    component: () => import('../views/roleManage.vue')
+    component: () => import('../views/roleManage')
   }
 ]
 
