@@ -15,12 +15,20 @@ const routes = [
   }, {
     path: '/userManage',
     name: 'userManage',
+<<<<<<< HEAD
     component: () => import('../views/userManage')
   },
   {
     path: '/userDetails',
     name: 'userDetails',
     component: () => import('../views/userManage/userDetails.vue')
+=======
+    component: () => import('../views/userManage.vue')
+  }, {
+    path: '/roleManage',
+    name: 'roleManage',
+    component: () => import('../views/roleManage')
+>>>>>>> dev
   }
 ]
 
