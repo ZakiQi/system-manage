@@ -4,6 +4,7 @@
       :title="title"
       :visible.sync="modalVisible"
       :confirm-loading="confirmLoading"
+      @cancel="handleCancel"
     >
       <div class="role-manage-modal">
          <a-form :label-col="{ span: 5 }" :wrapper-col="{ span: 16 }">
@@ -68,7 +69,6 @@ export default {
       loading: false,
       title: '',
       modalVisible: false,
-      ModalText: 'Content of the modal',
       confirmLoading: false
     }
   },

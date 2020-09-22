@@ -7,6 +7,7 @@ import Store from './store'
 // 使用Antd
 import Antd from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.css'
+
 Vue.use(Antd)
 
 export default ({ router, states = {}, App }, resolve = () => {}) => {

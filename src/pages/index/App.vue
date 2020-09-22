@@ -5,17 +5,19 @@
       <router-link to="/about">about</router-link>
     </div>
     -->
-    <router-view/>
+    <a-locale-provider :locale="locale">
+      <router-view/>
+    </a-locale-provider>
   </div>
 </template>
 
 <script>
+import zhCN from 'ant-design-vue/lib/locale-provider/zh_CN'
 export default {
   data () {
     return {
+      locale: zhCN
     }
-  },
-  methods: {
   }
 }
 </script>

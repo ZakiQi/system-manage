@@ -11,7 +11,8 @@
         :pagination="false"
         :data-source="roleData"
         :row-key="record => record.number + '_' + record.roleNumber"
-        :scroll="{ y: selfHeight }">
+        :scroll="{ y: selfHeight }"
+        >
         <!-- 描述 -->
         <template slot="describe" slot-scope="key, scope">
           <span :title="scope.describe">{{scope.describe}}</span>
@@ -24,7 +25,14 @@
     </div>
     <!-- 分页 -->
     <div class="role-pagination">
-      <a-pagination show-quick-jumper size="small" :default-current="2" :total="500" @change="onChange" />
+      <a-pagination
+        show-quick-jumper
+        :default-current="2"
+        size="small"
+        :total="500"
+        show-less-items
+        @change="onChange"
+      />
     </div>
     <edit-modal :visible.sync="modalVisible" :editInfo="editInfo" @updateRole="updateRole"></edit-modal>
   </div>

@@ -7,4 +7,4 @@ if (process.env.NODE_ENV !== 'production') {
   require('./mock/mock.js')
 }
 
-bootstrap({router, states, App})
+bootstrap({ router, states, App })
