@@ -13,7 +13,7 @@
         <a :title="scope.name">{{scope.name}}</a>
       </template>
       <span slot="tags" slot-scope="key, scope">
-        <router-link class="btn" :to="{path: '/userDetails', query: { id: scope.key, userName: scope.name }}"><span class="iconfont icon-icon-test7 edit"></span></router-link>
+        <router-link class="btn" :to="{path: '/userDetails', query: { userName: scope.name, name: scope.name, password: scope.password, tel: scope.tel, org: scope.org, nameSpell: scope.nameSpell }}"><span class="iconfont icon-icon-test7 edit"></span></router-link>
         <router-link class="btn" :to="{path: '/userDetails', query: { id: scope.key, userName: scope.name }}"><span class="iconfont icon-icon-test10 setting"></span></router-link>
         <router-link class="btn" :to="{path: '/userDetails', query: { num: 1, userName: scope.id }}"><span class="iconfont icon-icon-test25 password"></span></router-link>
         <router-link class="btn" :to="{path: '/userDetails', query: { num: 4, userName: scope.id }}"><span class="iconfont icon-icon-test34 forbid"></span></router-link>
@@ -275,11 +275,26 @@ export default {
   },
 
   methods: {
+    // 搜索
     searchBlur: (e) => {
-      console.log(e.target.value)
+      var searchVal = e.target.value
+      // 匹配搜索结果
+      if (searchVal) {
+
+      }
+    },
+
+    // 获取用户数据
+    getUserData: function (params) {
+      this.$store.dispatch('UserMutation/getUserData', params).then(e => {
+        console.log(e, 'e')
+        this.roleData = e
+      })
     }
   },
-  created () {}
+  mounted () {
+    this.getUserData()
+  }
 }
 </script>
 

@@ -1,118 +1,194 @@
 <template>
-  <a-form :label-col="labelCol" :wrapper-col="wrapperCol">
-    <a-form-item
-      label="Fail"
-      validate-status="error"
-      help="Should be combination of numbers & alphabets"
-    >
-      <a-input id="error" placeholder="unavailable choice" />
-    </a-form-item>
-    <a-form-item label="Warning" validate-status="warning">
-      <a-input id="warning" placeholder="Warning" />
-    </a-form-item>
-    <a-form-item
-      label="Validating"
-      has-feedback
-      validate-status="validating"
-      help="The information is being validated..."
-    >
-      <a-input id="validating" placeholder="I'm the content is being validated" />
-    </a-form-item>
-    <a-form-item label="Success" has-feedback validate-status="success">
-      <a-input id="success" placeholder="I'm the content" />
-    </a-form-item>
-    <a-form-item label="Warning" has-feedback validate-status="warning">
-      <a-input id="warning2" placeholder="Warning" />
-    </a-form-item>
-    <a-form-item
-      label="Fail"
-      has-feedback
-      validate-status="error"
-      help="Should be combination of numbers & alphabets"
-    >
-      <a-input id="error2" placeholder="unavailable choice" />
-    </a-form-item>
-    <a-form-item label="Success" has-feedback validate-status="success">
-      <a-date-picker style="width: 100%" />
-    </a-form-item>
-    <a-form-item label="Warning" has-feedback validate-status="warning">
-      <a-time-picker style="width: 100%" />
-    </a-form-item>
-    <a-form-item label="Error" has-feedback validate-status="error">
-      <a-select default-value="1">
-        <a-select-option value="1">
-          Option 1
-        </a-select-option>
-        <a-select-option value="2">
-          Option 2
-        </a-select-option>
-        <a-select-option value="3">
-          Option 3
-        </a-select-option>
-      </a-select>
-    </a-form-item>
-    <a-form-item
-      label="Validating"
-      has-feedback
-      validate-status="validating"
-      help="The information is being validated..."
-    >
-      <a-cascader :default-value="['1']" :options="[]" />
-    </a-form-item>
-    <a-form-item label="inline" style="margin-bottom:0;">
-      <a-form-item
-        validate-status="error"
-        help="Please select the correct date"
-        :style="{ display: 'inline-block', width: 'calc(50% - 12px)' }"
-      >
-        <a-date-picker style="width: 100%" />
-      </a-form-item>
-      <span :style="{ display: 'inline-block', width: '24px', textAlign: 'center' }">
-        -
-      </span>
-      <a-form-item :style="{ display: 'inline-block', width: 'calc(50% - 12px)' }">
-        <a-date-picker style="width: 100%" />
-      </a-form-item>
-    </a-form-item>
-    <a-form-item label="Success" has-feedback validate-status="success">
-      <a-input-number style="width: 100%" />
-    </a-form-item>
-    <a-form-item label="Success" has-feedback validate-status="success">
-      <a-input allow-clear placeholder="with allowClear" />
-    </a-form-item>
+  <div id="user-detail">
+    <div class="details-con">
+      <a-form-model ref="ruleForm" :model="ruleForm" v-bind="layout">
+        <!-- 用户名 -->
+        <a-form-item has-feedback label="用户名" prop="uname">
+          <a-input
+            v-model="userName"
+            type="username"
+            disabled>
+            <!-- 输入框前置图标 -->
+            <a-icon slot="prefix" type="user" />
+          </a-input>
+        </a-form-item>
 
-    <a-form-item label="Warning" has-feedback validate-status="warning">
-      <a-input-password placeholder="with input password" />
-    </a-form-item>
+        <!-- 姓名 -->
+        <a-form-model-item has-feedback label="姓名" prop="name" :validate-status="nameStatus" :help="nameTip">
+          <a-input
+            v-model="name"
+            type="text"
+            autocomplete="off"
+            allow-clear
+            placeholder="请输入姓名"
+            @blur="checkName">
+            <a-icon slot="prefix" type="user" />
+          </a-input>
+        </a-form-model-item>
 
-    <a-form-item label="Error" has-feedback validate-status="error">
-      <a-input-password allow-clear placeholder="with input password and allowClear" />
-    </a-form-item>
-  </a-form>
-</template>
+        <!-- 密码 -->
+        <a-form-model-item has-feedback label="密码" prop="pass">
+          <a-input-password
+            v-model="passWord"
+            type="password"
+            disabled>
+            <a-icon slot="prefix" type="lock" />
+          </a-input-password>
+        </a-form-model-item>
+
+        <!-- 联系电话 -->
+        <a-form-model-item
+          has-feedback label="联系电话"
+          prop="tel"
+          :validate-status="telStatus"
+          :help="telTip">
+          <a-input
+            v-model.number="tel"
+            placeholder="请输入联系电话"
+            @blur="checkTel"
+            allow-clear>
+            <a-icon slot="prefix" type="phone" />
+          </a-input>
+        </a-form-model-item>
+
+        <!-- 组织 -->
+        <a-form-model-item
+          has-feedback label="组织"
+          prop="organization"
+          :validate-status="orgStatus">
+          <a-input v-model="org" type="text" autocomplete="off" placeholder="请选择组织" allow-clear>
+            <a-icon slot="prefix" type="team" />
+          </a-input>
+        </a-form-model-item>
+
+        <!-- 用户简拼 -->
+        <a-form-model-item has-feedback label="用户简拼" prop="nameSpell">
+          <a-input :value="nameSpell" type="text" autocomplete="off" disabled>
+            <a-icon slot="prefix" type="tag" />
+          </a-input>
+        </a-form-model-item>
+
+        <!-- 按钮 -->
+        <a-form-model-item :wrapper-col="{ span: 14, offset: 4 }">
+          <a-button type="primary" @click="submitForm('ruleForm')">保存</a-button>
+          <a-button style="margin-left: 10px" @click="back('ruleForm')">返回</a-button>
+        </a-form-model-item>
+      </a-form-model>
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
   data () {
     return {
-      id: this.$route.query.id,
       userName: this.$route.query.userName,
-      nameStaus: 'error'
+      name: this.$route.query.name,
+      passWord: this.$route.query.password,
+      tel: this.$route.query.tel,
+      org: this.$route.query.org,
+      nameSpell: this.$route.query.nameSpell,
+      nameStatus: '',
+      orgStatus: '',
+      telStatus: '',
+      nameTip: '',
+      telTip: '',
+      ruleForm: {
+        pass: '',
+        checkPass: '',
+        age: ''
+      },
+      layout: {
+        labelCol: { span: 4 },
+        wrapperCol: { span: 14 }
+      }
+    }
+  },
+
+  methods: {
+    abc () {
+      return {
+        nameTip: '长度1-20，只支持中文、字母、数字、下划线、中划线',
+        telTip: '长度为11位数字的手机号码'
+      }
+    },
+
+    // 校验姓名合法性
+    checkName () {
+      // 匹配长度1-20，只支持中文、字母、数字、下划线、中划线
+      var nameReg = new RegExp(/^[(\w|\-|\u4E00-\u9FA5)]{1,20}$/)
+      console.log(this.name)
+      var checkNameResult = nameReg.test(this.name)
+      if (this.name && checkNameResult) {
+        // 姓名输入合法
+        this.nameStatus = 'success'
+        this.nameTip = ''
+      } else {
+        // 姓名输入不合法
+        this.nameStatus = 'error'
+        this.nameTip = '长度1-20，只支持中文、字母、数字、下划线、中划线'
+      }
+    },
+
+    // 校验电话合法性
+    checkTel () {
+      // 匹配长度为11位数字的手机号码
+      var telReg = new RegExp(/^1(3|4|5|7|8)\d{9}$/)
+      var checkTelResult = telReg.test(this.tel)
+      if (this.tel && checkTelResult) {
+        this.telStatus = 'success'
+        this.telTip = ''
+      } else {
+        this.telStatus = 'error'
+        this.telTip = '长度为11位数字的手机号码'
+      }
+    },
+
+    // 按钮
+    // 确认
+    submitForm (params) {
+      if (this.nameStatus === 'success' && this.telStatus === 'success') {
+        if (this.org) {
+          this.$store.dispatch('UserMutation/saveUserInfo', params).then(e => {
+            console.log(e, 'e')
+            this.roleData = e
+          })
+        } else {
+          this.$message.warning('请选择组织')
+        }
+      } else {
+        this.$message.error('信息填写有误')
+        if (this.nameStatus === '') {
+          this.nameStatus = 'error'
+          this.nameTip = '长度1-20，只支持中文、字母、数字、下划线、中划线'
+        }
+        if (this.telStatus === '') {
+          this.telStatus = 'error'
+          this.telTip = '长度为11位数字的手机号码'
+        }
+      }
+    },
+    // 返回
+    back () {
+      this.$router.go(-1)
+    }
+  },
+
+  mounted () {
+    if (this.name) {
+      this.checkName()
+    }
+    if (this.tel) {
+      console.log(this.tel)
+      this.checkTel()
     }
   }
 }
 </script>
 
 <style lang="less" scoped>
-  .details-con {
-    width: 40rem;
-    margin: 50px auto;
-    .detail-info input {
-      width: 30rem;
-    }
-  }
-  .ant-form-item-control-wrapper {
-    display: inline-block;
-  }
+.details-con {
+  width: 40rem;
+  margin: 80px auto;
+}
 </style>
