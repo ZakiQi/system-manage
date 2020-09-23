@@ -19,7 +19,10 @@
         </template>
         <!-- 操作栏 -->
         <template slot="operate" slot-scope="key, scope">
-          <a class="iconfont icon-icon-test7 edit-role" @click="editRole(scope)"></a>
+          <a class="iconfont icon-icon-test7 operat-icon" title="编辑" @click="showModal('modalVisible', scope)"></a>
+          <a class="iconfont icon-icon-test28 operat-icon" title="关联模块" @click="showModal('relateVisible', scope)"></a>
+          <a class="iconfont icon-icon-test18 operat-icon" title="添加数据权限管理" @click="showModal('authVisible', scope)"></a>
+          <a class="iconfont icon-icon-test32 operat-icon operat-del" title="删除"></a>
         </template>
       </a-table>
     </div>
@@ -35,16 +38,22 @@
       />
     </div>
     <edit-modal :visible.sync="modalVisible" :editInfo="editInfo" @updateRole="updateRole"></edit-modal>
+    <relate-modal :visible.sync="relateVisible"></relate-modal>
+    <auth-modal :visible.sync="authVisible"></auth-modal>
   </div>
 </template>
 
 <script>
 
 import editModal from './editModal'
+import relateModal from './relateModal'
+import authModal from './authModal'
 export default {
   data () {
     return {
       modalVisible: false,
+      relateVisible: false,
+      authVisible: false,
       searchVal: '',
       editInfo: {},
       selfHeight: 40,
@@ -85,7 +94,9 @@ export default {
   },
 
   components: {
-    editModal
+    editModal,
+    relateModal,
+    authModal
   },
 
   computed: {
@@ -105,9 +116,16 @@ export default {
       })
     },
 
-    editRole (scope) {
-      this.modalVisible = true
-      this.editInfo = scope
+    /**
+     * @description 显示对应对话框
+     */
+    showModal (modal, scope) {
+      this[modal] = true
+      switch (modal) {
+        case 'modalVisible':
+          this.editInfo = scope
+          break
+      }
     },
 
     /**
@@ -185,8 +203,16 @@ export default {
     }
   }
 
-  .edit-role{
+  .operat-icon{
     font-size:16px;
+    margin-right:3px;
+    &:hover{
+      color: red;
+    }
+  }
+
+  .operat-del{
+    color: red;
   }
 
   .role-pagination{
