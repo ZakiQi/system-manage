@@ -7,6 +7,7 @@
           <a-input
             v-model="userName"
             type="username"
+            autocomplete="off"
             disabled>
             <!-- 输入框前置图标 -->
             <a-icon slot="prefix" type="user" />
@@ -31,6 +32,7 @@
           <a-input-password
             v-model="passWord"
             type="password"
+            autocomplete="off"
             disabled>
             <a-icon slot="prefix" type="lock" />
           </a-input-password>
@@ -46,6 +48,7 @@
             v-model.number="tel"
             placeholder="请输入联系电话"
             @blur="checkTel"
+            autocomplete="on"
             allow-clear>
             <a-icon slot="prefix" type="phone" />
           </a-input>
@@ -54,11 +57,19 @@
         <!-- 组织 -->
         <a-form-model-item
           has-feedback label="组织"
-          prop="organization"
-          :validate-status="orgStatus">
-          <a-input v-model="org" type="text" autocomplete="off" placeholder="请选择组织" allow-clear>
-            <a-icon slot="prefix" type="team" />
-          </a-input>
+          prop="organization">
+          <a-tree-select
+            v-model="value"
+            tree-data-simple-mode
+            style="width: 100%"
+            :dropdown-style="{ maxHeight: '400px', overflow: 'auto' }"
+            :tree-data="treeData"
+            placeholder="请选择组织"
+            allowClear
+            @change="changeOrg"
+            :defaultValue="org"
+            :load-data="onLoadData"
+          />
         </a-form-model-item>
 
         <!-- 用户简拼 -->
@@ -89,7 +100,6 @@ export default {
       org: this.$route.query.org,
       nameSpell: this.$route.query.nameSpell,
       nameStatus: '',
-      orgStatus: '',
       telStatus: '',
       nameTip: '',
       telTip: '',
@@ -101,7 +111,13 @@ export default {
       layout: {
         labelCol: { span: 4 },
         wrapperCol: { span: 14 }
-      }
+      },
+      value: undefined,
+      treeData: [
+        { id: 1, pId: 0, value: '1', title: 'Expand to load' },
+        { id: 2, pId: 0, value: '2', title: 'Expand to load' },
+        { id: 3, pId: 0, value: '3', title: 'Tree Node', isLeaf: true }
+      ]
     }
   },
 
@@ -117,7 +133,6 @@ export default {
     checkName () {
       // 匹配长度1-20，只支持中文、字母、数字、下划线、中划线
       var nameReg = new RegExp(/^[(\w|\-|\u4E00-\u9FA5)]{1,20}$/)
-      console.log(this.name)
       var checkNameResult = nameReg.test(this.name)
       if (this.name && checkNameResult) {
         // 姓名输入合法
@@ -144,13 +159,17 @@ export default {
       }
     },
 
+    // 选则组织
+    changeOrg (val) {
+      this.org = val
+    },
+
     // 按钮
     // 确认
     submitForm (params) {
       if (this.nameStatus === 'success' && this.telStatus === 'success') {
         if (this.org) {
           this.$store.dispatch('UserMutation/saveUserInfo', params).then(e => {
-            console.log(e, 'e')
             this.roleData = e
           })
         } else {
@@ -171,6 +190,30 @@ export default {
     // 返回
     back () {
       this.$router.go(-1)
+    },
+    genTreeNode (parentId, isLeaf = false) {
+      const random = Math.random()
+        .toString(36)
+        .substring(2, 6)
+      return {
+        id: random,
+        pId: parentId,
+        value: random,
+        title: isLeaf ? 'Tree Node' : 'Expand to load',
+        isLeaf
+      }
+    },
+    onLoadData (treeNode) {
+      return new Promise(resolve => {
+        const { id } = treeNode.dataRef
+        setTimeout(() => {
+          this.treeData = this.treeData.concat([
+            this.genTreeNode(id, false),
+            this.genTreeNode(id, true)
+          ])
+          resolve()
+        }, 300)
+      })
     }
   },
 
@@ -179,7 +222,6 @@ export default {
       this.checkName()
     }
     if (this.tel) {
-      console.log(this.tel)
       this.checkTel()
     }
   }

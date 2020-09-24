@@ -14,10 +14,10 @@
       </template>
       <span slot="tags" slot-scope="key, scope">
         <router-link class="btn" :to="{path: '/userDetails', query: { userName: scope.name, name: scope.name, password: scope.password, tel: scope.tel, org: scope.org, nameSpell: scope.nameSpell }}"><span class="iconfont icon-icon-test7 edit"></span></router-link>
-        <router-link class="btn" :to="{path: '/userDetails', query: { id: scope.key, userName: scope.name }}"><span class="iconfont icon-icon-test10 setting"></span></router-link>
-        <router-link class="btn" :to="{path: '/userDetails', query: { num: 1, userName: scope.id }}"><span class="iconfont icon-icon-test25 password"></span></router-link>
-        <router-link class="btn" :to="{path: '/userDetails', query: { num: 4, userName: scope.id }}"><span class="iconfont icon-icon-test34 forbid"></span></router-link>
-        <router-link class="btn" :to="{path: '/userDetails', query: { num: 5, userName: scope.id }}"><span class="iconfont icon-icon-test29 refresh"></span></router-link>
+        <span class="btn iconfont icon-icon-test10 setting" @click="setting(1)"></span>
+        <span class="btn iconfont icon-icon-test25 password" @click="forbid(2)"></span>
+        <span class="btn iconfont icon-icon-test34 forbid" @click="forbid(3)"></span>
+        <span class="btn iconfont icon-icon-test29 refresh" @click="forbid(4)"></span>
       </span>
     </a-table>
   </div>
@@ -87,8 +87,7 @@ export default {
           simple: 'KFCS1',
           management: '广州分公司',
           creator: 'yezhiyz1',
-          userStatus: '已激活',
-          tags: ['nice', 'developer']
+          userStatus: '已激活'
         },
         {
           key: '2',
@@ -96,8 +95,7 @@ export default {
           simple: 'CSTD',
           management: '广州分公司',
           creator: 'yezhiyz1',
-          userStatus: '已激活',
-          tags: ['loser']
+          userStatus: '已激活'
         },
         {
           key: '3',
@@ -105,8 +103,7 @@ export default {
           simple: 'NSYS',
           management: '南沙分公司',
           creator: 'yezhiyz1',
-          userStatus: '已激活',
-          tags: ['cool', 'teacher']
+          userStatus: '已激活'
         },
         {
           key: '4',
@@ -114,8 +111,7 @@ export default {
           simple: 'KFCS1',
           management: '广州分公司',
           creator: 'yezhiyz1',
-          userStatus: '已激活',
-          tags: ['nice', 'developer']
+          userStatus: '已激活'
         },
         {
           key: '5',
@@ -123,8 +119,7 @@ export default {
           simple: 'CSTD',
           management: '广州分公司',
           creator: 'yezhiyz1',
-          userStatus: '已激活',
-          tags: ['loser']
+          userStatus: '已激活'
         },
         {
           key: '6',
@@ -132,8 +127,7 @@ export default {
           simple: 'NSYS',
           management: '南沙分公司',
           creator: 'yezhiyz1',
-          userStatus: '已激活',
-          tags: ['cool', 'teacher']
+          userStatus: '已激活'
         },
         {
           key: '7',
@@ -141,8 +135,7 @@ export default {
           simple: 'KFCS1',
           management: '广州分公司',
           creator: 'yezhiyz1',
-          userStatus: '已激活',
-          tags: ['nice', 'developer']
+          userStatus: '已激活'
         },
         {
           key: '8',
@@ -150,8 +143,7 @@ export default {
           simple: 'CSTD',
           management: '广州分公司',
           creator: 'yezhiyz1',
-          userStatus: '已激活',
-          tags: ['loser']
+          userStatus: '已激活'
         },
         {
           key: '9',
@@ -159,8 +151,7 @@ export default {
           simple: 'NSYS',
           management: '南沙分公司',
           creator: 'yezhiyz1',
-          userStatus: '已激活',
-          tags: ['cool', 'teacher']
+          userStatus: '已激活'
         },
         {
           key: '10',
@@ -168,8 +159,7 @@ export default {
           simple: 'KFCS1',
           management: '广州分公司',
           creator: 'yezhiyz1',
-          userStatus: '已激活',
-          tags: ['nice', 'developer']
+          userStatus: '已激活'
         },
         {
           key: '11',
@@ -177,8 +167,7 @@ export default {
           simple: 'CSTD',
           management: '广州分公司',
           creator: 'yezhiyz1',
-          userStatus: '已激活',
-          tags: ['loser']
+          userStatus: '已激活'
         },
         {
           key: '12',
@@ -186,8 +175,7 @@ export default {
           simple: 'NSYS',
           management: '南沙分公司',
           creator: 'yezhiyz1',
-          userStatus: '已激活',
-          tags: ['cool', 'teacher']
+          userStatus: '已激活'
         },
         {
           key: '13',
@@ -195,8 +183,7 @@ export default {
           simple: 'KFCS1',
           management: '广州分公司',
           creator: 'yezhiyz1',
-          userStatus: '已激活',
-          tags: ['nice', 'developer']
+          userStatus: '已激活'
         },
         {
           key: '14',
@@ -204,8 +191,7 @@ export default {
           simple: 'CSTD',
           management: '广州分公司',
           creator: 'yezhiyz1',
-          userStatus: '已激活',
-          tags: ['loser']
+          userStatus: '已激活'
         },
         {
           key: '15',
@@ -213,8 +199,7 @@ export default {
           simple: 'NSYS',
           management: '南沙分公司',
           creator: 'yezhiyz1',
-          userStatus: '已激活',
-          tags: ['cool', 'teacher']
+          userStatus: '已激活'
         },
         {
           key: '16',
@@ -222,8 +207,7 @@ export default {
           simple: 'KFCS1',
           management: '广州分公司',
           creator: 'yezhiyz1',
-          userStatus: '已激活',
-          tags: ['nice', 'developer']
+          userStatus: '已激活'
         },
         {
           key: '17',
@@ -231,8 +215,7 @@ export default {
           simple: 'CSTD',
           management: '广州分公司',
           creator: 'yezhiyz1',
-          userStatus: '已激活',
-          tags: ['loser']
+          userStatus: '已激活'
         },
         {
           key: '18',
@@ -240,8 +223,7 @@ export default {
           simple: 'NSYS',
           management: '南沙分公司',
           creator: 'yezhiyz1',
-          userStatus: '已激活',
-          tags: ['cool', 'teacher']
+          userStatus: '已激活'
         },
         {
           key: '19',
@@ -249,8 +231,7 @@ export default {
           simple: 'KFCS1',
           management: '广州分公司',
           creator: 'yezhiyz1',
-          userStatus: '已激活',
-          tags: ['nice', 'developer']
+          userStatus: '已激活'
         },
         {
           key: '20',
@@ -258,8 +239,7 @@ export default {
           simple: 'CSTD',
           management: '广州分公司',
           creator: 'yezhiyz1',
-          userStatus: '已激活',
-          tags: ['loser']
+          userStatus: '已激活'
         },
         {
           key: '21',
@@ -267,8 +247,7 @@ export default {
           simple: 'NSYS',
           management: '南沙分公司',
           creator: 'yezhiyz1',
-          userStatus: '已激活',
-          tags: ['cool', 'teacher']
+          userStatus: '已激活'
         }
       ]
     }
@@ -287,8 +266,30 @@ export default {
     // 获取用户数据
     getUserData: function (params) {
       this.$store.dispatch('UserMutation/getUserData', params).then(e => {
-        console.log(e, 'e')
         this.roleData = e
+      })
+    },
+
+    // 设置
+    setting () {
+
+    },
+
+    // 失效记录
+    forbid (num) {
+      // 在此之前还需要判断权限
+      this.$confirm({
+        title: '提示',
+        content: '是否失效所选记录',
+        icon: 'warning',
+        okText: '确认',
+        cancelText: '取消',
+        onOk () {
+          console.log(num + '确认')
+        },
+        onCancel () {
+          console.log(num + '取消')
+        }
       })
     }
   },
