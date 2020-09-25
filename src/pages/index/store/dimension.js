@@ -5,7 +5,8 @@ export default {
   namespaced: true,
 
   state: {
-    name: 'dimension'
+    name: 'dimension',
+    userData: []
   },
 
   actions: {
@@ -57,4 +58,11 @@ export default {
       })
     }
   }
+
+  // mutations: {
+  //   UPDATE_TEXT: (state, payload = {}) => {
+  //     console.log(state)
+  //     console.log(payload)
+  //   }
+  // }
 }

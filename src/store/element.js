@@ -1,11 +1,11 @@
 export default {
   namespaced: true,
   state: {
-    data: 'aaa',
+    data: 'aaa'
   },
   actions: {
-    actionsTest(dddd) {
-      console.log('actionsTest!!!', dddd);
-    },
-  },
-};
+    actionsTest (dddd) {
+      console.log('actionsTest!!!', dddd)
+    }
+  }
+}
