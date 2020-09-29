@@ -177,7 +177,7 @@ export default {
   height: 100%;
   width: 100%;
   overflow: hidden;
-  padding: 10px 20px;
+  // padding: 10px 20px;
 
   /deep/ .role-top-search{
     text-align: left;
@@ -194,7 +194,7 @@ export default {
 
   /deep/ .role-table-content{
     border: 1px solid #e8e8e8;
-    height: calc(~"100% - 70px");
+    height: calc(~"100% - 74px");
     overflow: auto;
 
     .ant-table-header{
@@ -203,7 +203,7 @@ export default {
   }
 
   .operat-icon{
-    font-size:16px;
+    color: @primary;
     margin-right:3px;
     &:hover{
       color: red;

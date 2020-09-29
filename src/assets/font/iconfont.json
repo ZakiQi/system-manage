@@ -6,6 +6,41 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "3216071",
+      "name": "添加",
+      "font_class": "icon--",
+      "unicode": "e712",
+      "unicode_decimal": 59154
+    },
+    {
+      "icon_id": "7417078",
+      "name": "删除",
+      "font_class": "shanchu",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
+      "icon_id": "9654170",
+      "name": "上线",
+      "font_class": "shangxian",
+      "unicode": "e670",
+      "unicode_decimal": 58992
+    },
+    {
+      "icon_id": "9654171",
+      "name": "下线",
+      "font_class": "xiaxian",
+      "unicode": "e671",
+      "unicode_decimal": 58993
+    },
+    {
+      "icon_id": "15983712",
+      "name": "添加",
+      "font_class": "weibiaoti-6",
+      "unicode": "e609",
+      "unicode_decimal": 58889
+    },
+    {
       "icon_id": "8776631",
       "name": "view",
       "font_class": "icon-test",

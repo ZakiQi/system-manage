@@ -132,16 +132,4 @@ export default {
 </script>
 
 <style lang="less" scoped>
-/deep/ .relate-modal{
-  td{
-    padding: 5px;
-  }
-  .ant-table-header,.ant-table-body{
-    overflow: auto !important;
-  }
-  .table-expand-icon{
-    color: #000;
-    font-size: 16px;
-  }
-}
 </style>

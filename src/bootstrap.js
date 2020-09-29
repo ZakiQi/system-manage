@@ -1,12 +1,13 @@
 import Vue from 'vue'
 // css reset
 import 'normalize.css'
-import './assets/css/scrollbar.css'
 import Store from './store'
 
 // 使用Antd
 import Antd from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.css'
+
+import './assets/css/global.css'
 
 Vue.use(Antd)
 
