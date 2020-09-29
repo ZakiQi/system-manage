@@ -7,6 +7,10 @@
       :show-search="showSearch"
       :filter-option="(inputValue, item) => item.title.indexOf(inputValue) !== -1"
       :show-select-all="false"
+      :list-style="{
+        width: '350px',
+        height: '300px',
+      }"
       @change="onChange"
     >
       <template
@@ -53,3 +57,87 @@
     />
   </div>
 </template>
+
+<script>
+import difference from 'lodash/difference'
+const mockData = []
+for (let i = 0; i < 20; i++) {
+  mockData.push({
+    key: i.toString(),
+    title: `content${i + 1}`,
+    description: `description of content${i + 1}`,
+    disabled: i % 4 === 0
+  })
+}
+
+const originTargetKeys = mockData.filter(item => +item.key % 3 > 1).map(item => item.key)
+
+const leftTableColumns = [
+  {
+    dataIndex: 'title',
+    title: 'Name'
+  },
+  {
+    dataIndex: 'description',
+    title: 'Description'
+  }
+]
+const rightTableColumns = [
+  {
+    dataIndex: 'title',
+    title: 'Name'
+  }
+]
+
+export default {
+  data () {
+    return {
+      mockData,
+      targetKeys: originTargetKeys,
+      disabled: false,
+      showSearch: false,
+      leftColumns: leftTableColumns,
+      rightColumns: rightTableColumns
+    }
+  },
+  methods: {
+    onChange (nextTargetKeys) {
+      this.targetKeys = nextTargetKeys
+    },
+
+    triggerDisable (disabled) {
+      this.disabled = disabled
+    },
+
+    triggerShowSearch (showSearch) {
+      this.showSearch = showSearch
+    },
+    getRowSelection ({ disabled, selectedKeys, itemSelectAll, itemSelect }) {
+      return {
+        getCheckboxProps: item => ({ props: { disabled: disabled || item.disabled } }),
+        onSelectAll (selected, selectedRows) {
+          const treeSelectedKeys = selectedRows
+            .filter(item => !item.disabled)
+            .map(({ key }) => key)
+          const diffKeys = selected
+            ? difference(treeSelectedKeys, selectedKeys)
+            : difference(selectedKeys, treeSelectedKeys)
+          itemSelectAll(diffKeys, selected)
+        },
+        onSelect ({ key }, selected) {
+          itemSelect(key, selected)
+        },
+        selectedRowKeys: selectedKeys
+      }
+    }
+  }
+}
+</script>
+
+<style lang="less" scoped>
+  #transfer {
+    width: 900px;
+    height: 300px;
+    margin: 50px auto;
+  }
+</style>
