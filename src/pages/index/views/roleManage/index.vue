@@ -44,9 +44,9 @@
 </template>
 
 <script>
-import editModal from './editModal'
-import relateModal from './relateModal'
-import authModal from './authModal'
+import editModal from './components/editModal'
+import relateModal from './components/relateModal'
+import authModal from './components/authModal'
 export default {
   data () {
     return {
