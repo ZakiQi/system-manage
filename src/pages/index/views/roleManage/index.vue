@@ -44,7 +44,6 @@
 </template>
 
 <script>
-
 import editModal from './editModal'
 import relateModal from './relateModal'
 import authModal from './authModal'

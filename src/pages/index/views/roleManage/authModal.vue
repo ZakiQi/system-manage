@@ -73,7 +73,11 @@ const treeData = [
     key: '0-1',
     title: '0-1',
     scopedSlots: { title: 'title' },
-    children: [{ key: '0-1-0', title: '0-1-0', scopedSlots: { title: 'title' } }, { key: '0-1-1', title: '0-1-1',scopedSlots: { title: 'title' } }]
+    children: [{
+      key: '0-1-0', title: '0-1-0', scopedSlots: { title: 'title' }
+    }, {
+      key: '0-1-1', title: '0-1-1', scopedSlots: { title: 'title' }
+    }]
   },
   { key: '0-2', title: '0-3', scopedSlots: { title: 'title' } }
 ]
