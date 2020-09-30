@@ -2,7 +2,7 @@
   <div class="role-main">
     <!-- 头部搜索 -->
     <div class="role-top-search">
-       <a-input-search placeholder="请输入关键字搜索" style="width: 300px" v-model="searchVal" @search="onSearch" />
+      <a-input-search v-if="authCode([6], 'some')" placeholder="请输入关键字搜索" style="width: 300px" v-model="searchVal" @search="onSearch" />
     </div>
     <!-- 表格内容 -->
     <div class="role-table-content">
@@ -160,6 +160,7 @@ export default {
 
   created () {
     this.getRoleInfo()
+    console.log(this.authCode([6, 4], 'some'), 'this.authCode(3)')
   },
 
   mounted () {

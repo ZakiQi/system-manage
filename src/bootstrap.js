@@ -20,6 +20,24 @@ export default ({ router, states = {}, App }, resolve = () => {}) => {
     render: h => h(App)
   }).$mount('#app')
 
+  const codes = [6, 7, 8, 9]
+
+  Vue.prototype.authCode = (code, type = 'some') => {
+    if (code instanceof Array) {
+      if (type === 'some') {
+        return code.some(item => {
+          return codes.includes(item)
+        })
+      } else {
+        return code.every(item => {
+          return codes.includes(item)
+        })
+      }
+    } else {
+      return codes.includes(code)
+    }
+  }
+
   // 回调函数
   resolve(app)
 }
