@@ -82,7 +82,7 @@ export default {
 
   methods: {
     getRelateData () {
-      API.getRelateData().then(e => {
+      this.$store.dispatch('Dimension/getRelateData').then(e => {
         this.relateData = e
       })
     },

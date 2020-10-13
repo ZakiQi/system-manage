@@ -37,6 +37,8 @@
   </div>
 </template>
 <script>
+
+import API from '@/store/api'
 export default {
   props: {
     visible: {
@@ -60,7 +62,6 @@ export default {
       this.$emit('update:visible', val)
     },
     editInfo (data) {
-      console.log(data, 'data')
       this.title = data.role
     }
   },
@@ -75,9 +76,9 @@ export default {
   },
 
   methods: {
-    // 提交
+    // 提交，保存角色信息
     handleOk (e) {
-      this.$store.dispatch('Dimension/saveRoleInfo', this.editInfo).then(e => {
+      API.saveRoleInfo(this.editInfo).then(e => {
         this.$emit('updateRole', e)
       })
       this.modalVisible = false

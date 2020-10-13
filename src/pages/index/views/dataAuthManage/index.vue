@@ -1,5 +1,5 @@
 <template>
-  <roleManage :pageType="'role'"></roleManage>
+  <roleManage :pageType="'auth'"></roleManage>
 </template>
 
 <script>

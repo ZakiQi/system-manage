@@ -13,17 +13,21 @@
       </template>
       <!-- 操作栏 -->
       <template slot="operate" slot-scope="key, scope">
-        <a class="iconfont icon-icon-test7 operat-icon" title="编辑" @click="showModal('modalVisible', scope)"></a>
-        <a class="iconfont icon-weibiaoti-6 operat-icon" title="添加" @click="showModal('modalVisible', scope)"></a>
-        <a class="iconfont icon-shangxian operat-icon" title="上线" @click="showModal('relateVisible', scope)"></a>
-        <a class="iconfont icon-xiaxian operat-icon" title="下线" @click="showModal('authVisible', scope)"></a>
-        <a class="iconfont icon-shanchu operat-icon operat-del" title="删除"></a>
+        <a class="iconfont icon-icon-test7 operat-icon" title="编辑" @click="showModal('edit', scope)"></a>
+        <a class="iconfont icon-weibiaoti-6 operat-icon" title="添加" @click="showModal('add', scope)"></a>
+        <a class="iconfont icon-shangxian operat-icon" title="上线" @click="activeOperation(true, scope)"></a>
+        <a class="iconfont icon-xiaxian operat-icon" title="下线" @click="activeOperation(false, scope)"></a>
+        <a class="iconfont icon-shanchu operat-icon operat-del" title="删除" @click="deleteItem(scope)"></a>
       </template>
     </a-table>
+    <organization :visible.sync="organizationVisible" :type="organizationType"/>
   </div>
 </template>
 
 <script>
+import organization from './components/organization'
+import API from '@/store/api.js'
+
 export default {
   data () {
     return {
@@ -44,7 +48,9 @@ export default {
         align: 'center',
         scopedSlots: { customRender: 'operate' }
       }],
-      relateData: []
+      relateData: [],
+      organizationVisible: false,
+      organizationType: 'add'
     }
   },
 
@@ -52,6 +58,7 @@ export default {
   },
 
   components: {
+    organization
   },
 
   methods: {
@@ -68,18 +75,32 @@ export default {
       return status === 1 ? '已上线' : '已下线'
     },
 
-    showModal () {
+    showModal (type = 'add', data) {
+      this.organizationType = type
+      this.organizationVisible = true
     },
 
-    getEelateData () {
-      this.$store.dispatch('Dimension/getEelateData').then(e => {
+    getRelateData () {
+      this.$store.dispatch('Dimension/getRelateData').then(e => {
         this.relateData = e
       })
+    },
+
+    activeOperation (status, scope) {
+      console.log(status, scope)
+    },
+
+    deleteItem (status, scope) {
+      console.log(status, scope)
     }
   },
 
   created () {
-    this.getEelateData()
+    this.getRelateData()
+
+    API.getData({ type: 1 }).then(e => {
+      console.log(e, '222222')
+    })
   },
 
   mounted () {

@@ -1,10 +1,11 @@
 <template>
   <div id="Main">
-    <!--<div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">about</router-link>
+    <div id="nav" v-if="!$route.name">
+      <router-link to="/roleManage">roleManage</router-link> |
+      <router-link to="/moduleManage">moduleManage</router-link> |
+      <router-link to="/dataAuthManage">dataAuthManage</router-link>
     </div>
-    -->
+
     <a-config-provider :locale="locale">
       <router-view/>
     </a-config-provider>

@@ -39,9 +39,9 @@ export default {
       })
     },
 
-    getEelateData ({ commit }, payoad = {}) {
+    getRelateData ({ commit }, payoad = {}) {
       return API.get({
-        url: '/data/getEelateData',
+        url: '/data/getRelateData',
         data: payoad
       }).then(data => {
         return data

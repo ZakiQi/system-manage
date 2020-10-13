@@ -11,6 +11,10 @@ const routes = [
     path: '/moduleManage',
     name: 'moduleManage',
     component: () => import('../views/moduleManage')
+  }, {
+    path: '/dataAuthManage',
+    name: 'dataAuthManage',
+    component: () => import('../views/dataAuthManage')
   }
 ]
 
