@@ -32,6 +32,10 @@ const routes = [
     path: '/organizationManage',
     name: 'organizationManage',
     component: () => import('../views/organizationManage')
+  }, {
+    path: '/dataRightsManage',
+    name: 'dataRightsManage',
+    component: () => import('../views/dataRightsManage')
   }
 ]
 
