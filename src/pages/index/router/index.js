@@ -17,21 +17,9 @@ const routes = [
     name: 'roleManage',
     component: () => import('../views/roleManage')
   }, {
-    path: '/userManage',
-    name: 'userManage',
-    component: () => import('../views/userManage')
-  }, {
-    path: '/transfer',
-    name: 'transfer',
-    component: () => import('../views/userManage/transfer.vue')
-  }, {
-    path: '/userDetails',
-    name: 'userDetails',
-    component: () => import('../views/userManage/userDetails.vue')
-  }, {
-    path: '/organizationManage',
-    name: 'organizationManage',
-    component: () => import('../views/organizationManage')
+    path: '/datarightsManage',
+    name: 'datarightsManage',
+    component: () => import('../views/dataRightsManage')
   }
 ]
 
