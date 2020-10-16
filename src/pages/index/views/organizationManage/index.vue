@@ -12,7 +12,7 @@
         <router-link class="btn" :to="{path: '/userDetails', query: { userName: scope.name, name: scope.name, password: scope.password, tel: scope.tel, org: scope.org, nameSpell: scope.nameSpell }}"><span class="iconfont icon-icon-test7 edit"></span></router-link>
         <span class="btn iconfont icon-icon-test10 setting"></span>
         <span class="btn iconfont close-btn"><a-icon type="close-circle" :style="{fontWeight: 'bold'}" /></span>
-        <span class="btn iconfont arrow-up" @click="toUp(this)"><a-icon type="up-circle" /></span>
+        <span class="btn iconfont arrow-up" @click="toUp(scope.key)"><a-icon type="up-circle" /></span>
         <span class="btn iconfont arrow-down" @click="toDown"><a-icon type="down-circle" /></span>
       </span>
     </a-table>
@@ -136,15 +136,35 @@ export default {
   },
   methods: {
     openAll () {
-      this.openNum = true
-      console.log(this.openNum)
+      const { caseDate } = this.props
+      const expandedKeys = []
+      caseDate.forEach(item => {
+        expandedKeys.push(this.deepTraversa(item))
+      })
+      this.setState({
+        expandedKeys: expandedKeys.flat()
+      })
     },
     closeAll () {},
-    toUp () {
-      console.log(this)
+    toUp (key) {
+      console.log(key)
+      this.moveItem(this.data, key)
     },
     toDown () {
       console.log('向下移动')
+    },
+    moveItem (data, key) {
+      // 先遍历得到当前分支元素
+      this.data.forEach((item, index) => {
+        if (item.children) {
+          this.moveItem(item.children)
+          console.log(item)
+        } else {
+          if (item.key === key) {
+            return key
+          }
+        }
+      })
     }
   }
 }
