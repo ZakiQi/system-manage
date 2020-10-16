@@ -5,7 +5,8 @@ export default {
   namespaced: true,
 
   state: {
-    name: 'dimension'
+    name: 'dimension',
+    userData: []
   },
 
   actions: {
@@ -36,6 +37,32 @@ export default {
       }).then(data => {
         return data
       })
+    },
+
+    getEelateData ({ commit }, payoad = {}) {
+      return API.get({
+        url: '/data/getEelateData',
+        data: payoad
+      }).then(data => {
+        return data
+      })
+    },
+
+    // 提交关联信息
+    submitRelate ({ commit }, payoad = {}) {
+      return API.post({
+        url: '/data/submitRelate',
+        data: payoad
+      }).then(data => {
+        return data
+      })
     }
   }
+
+  // mutations: {
+  //   UPDATE_TEXT: (state, payload = {}) => {
+  //     console.log(state)
+  //     console.log(payload)
+  //   }
+  // }
 }
