@@ -1,9 +1,13 @@
 <template>
   <div id="Main">
     <div id="nav" v-if="!$route.name">
-      <router-link to="/roleManage">roleManage</router-link> |
-      <router-link to="/moduleManage">moduleManage</router-link> |
-      <router-link to="/dataAuthManage">dataAuthManage</router-link>
+      <router-link to="/roleManage">角色管理</router-link> |
+      <router-link to="/moduleManage">模块管理</router-link> |
+      <router-link to="/dataAuthManage">数据权限管理</router-link> |
+      <router-link to="/operationLog">标签操作日志</router-link> |
+      <router-link to="/systemLog">系统操作日志</router-link> |
+      <router-link to="/dataFilter">数据脱敏管理</router-link> |
+      <router-link to="/sendMessage">消息推送管理</router-link>
     </div>
 
     <a-config-provider :locale="locale">

@@ -15,6 +15,22 @@ const routes = [
     path: '/dataAuthManage',
     name: 'dataAuthManage',
     component: () => import('../views/dataAuthManage')
+  }, {
+    path: '/operationLog',
+    name: 'operationLog',
+    component: () => import('../views/operationLog')
+  }, {
+    path: '/systemLog',
+    name: 'systemLog',
+    component: () => import('../views/systemLog')
+  }, {
+    path: '/dataFilter',
+    name: 'dataFilter',
+    component: () => import('../views/dataFilter')
+  }, {
+    path: '/sendMessage',
+    name: 'sendMessage',
+    component: () => import('../views/sendMessage')
   }
 ]
 
