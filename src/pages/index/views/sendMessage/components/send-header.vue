@@ -3,7 +3,7 @@
     <span>内容： </span>
     <a-input placeholder="请输入内容" class="send-content" v-model="content" />
     <span class="user-name-span">状态： </span>
-    <a-select class="send-type" @change="handleChange">
+    <a-select class="send-type" mode="multiple" placeholder="请选择条件" v-model="selectVal" @select="selecrHandle">
       <a-select-option value="1">已推送</a-select-option>
       <a-select-option value="0">未推送</a-select-option>
     </a-select>
@@ -19,7 +19,9 @@ export default {
   data () {
     return {
       userName: '',
-      date: []
+      date: [],
+      content: '',
+      selectVal: []
     }
   },
 
@@ -31,7 +33,12 @@ export default {
 
       Bus.$emit('querySystemLog', params)
     },
-    handleChange () {
+    // 选择的时候
+    selecrHandle (val) {
+      this.selectVal = []
+      this.$nextTick(() => {
+        this.selectVal.push(val)
+      })
     }
   }
 }

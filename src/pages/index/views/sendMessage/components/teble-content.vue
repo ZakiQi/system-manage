@@ -8,28 +8,33 @@
       :data-source="data"
       :rowClassName="tableRowClass"
       :row-key="(e, i) => e.userName + i">
-      <template slot="operate">
-        <i class="iconfont">&#xe645;</i>
-        <i class="iconfont">&#xe63d;</i>
-        <i class="iconfont">&#xe601;</i>
+      <template slot="type" slot-scope="key, scope">
+        <span class="send-yes" v-if="scope.type">已推送</span>
+        <span class="send-no" v-else>未推送</span>
+      </template>
+      <template slot="operate" slot-scope="key, scope">
+        <i class="iconfont send-operation" title="推送">&#xe645;</i>
+        <i class="iconfont send-operation" title="编辑推送内容" @click="sendMessage(scope)">&#xe63d;</i>
+        <i class="iconfont send-operation del-operation" title="删除推送">&#xe601;</i>
       </template>
     </a-table>
     <div class="log-pagination">
       <a-pagination
         show-quick-jumper
-        :default-current="2"
         size="small"
         :total="500"
         show-less-items
         @change="onChange"
       />
     </div>
+    <message-editor :sendVisible.sync="sendVisible"></message-editor>
   </div>
 </template>
 
 <script>
 
 import Bus from '@/store/common/bus'
+import messageEditor from './message-editor'
 export default {
   data () {
     return {
@@ -54,8 +59,9 @@ export default {
         key: 'createTime'
       }, {
         title: '状态',
-        dataIndex: 'time',
-        key: 'state'
+        dataIndex: 'type',
+        key: 'type',
+        scopedSlots: { customRender: 'type' }
       }, {
         title: '操作',
         dataIndex: 'time',
@@ -65,25 +71,35 @@ export default {
       data: [{
         userName: '11111111',
         operateName: '222222222',
-        time: '44444'
+        time: '44444',
+        type: 1
       }, {
         userName: '11111111',
         operateName: '222222222',
-        time: '44444'
+        time: '44444',
+        type: 0
       }, {
         userName: '11111111',
         operateName: '222222222',
-        time: '44444'
+        time: '44444',
+        type: 1
       }, {
         userName: '11111111',
         operateName: '222222222',
-        time: '44444'
+        time: '44444',
+        type: 0
       }, {
         userName: '11111111',
         operateName: '222222222',
-        time: '44444'
-      }]
+        time: '44444',
+        type: 1
+      }],
+      sendVisible: false
     }
+  },
+
+  components: {
+    messageEditor
   },
 
   methods: {
@@ -105,6 +121,10 @@ export default {
 
     onChange (page, pageSize) {
       this.querySystemLog({ page: page, pageSize: pageSize })
+    },
+
+    sendMessage () {
+      this.sendVisible = true
     }
   },
 
@@ -130,6 +150,28 @@ export default {
       text-indent: 18px;
       background-color: #fbfcfe;
       color: #5e5e5e;
+    }
+    .send-yes{
+      color: #5cb85c;
+    }
+    .send-no {
+      color: #ccc;
+    }
+    .send-operation{
+      font-size: 16px;
+      cursor: pointer;
+      color: #5cb85c;
+      margin-right: 5px;
+
+      &:hover {
+        color: #1890ff;
+      }
+    }
+    .del-operation{
+      color: red;
+      &:hover {
+        color: red;
+      }
     }
     /deep/ .ant-table-body{
       .singleClass{

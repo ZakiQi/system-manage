@@ -9,6 +9,8 @@
 <script>
 import sendHeader from './components/send-header'
 import tebleContent from './components/teble-content'
+import quill from 'vue-quill-editor'
+console.log(quill, 'quill')
 export default {
   data () {
     return {}
