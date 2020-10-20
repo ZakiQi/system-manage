@@ -4,6 +4,11 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 const routes = [
   {
+    path: '/index',
+    name: 'index',
+    component: () => import('../views/index')
+  },
+  {
     path: '/roleManage',
     name: 'roleManage',
     component: () => import('../views/roleManage')
