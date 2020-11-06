@@ -25,19 +25,27 @@
     </div>
 
     <!-- 主体部分 -->
-    <div class="ecpp-center-wrap"></div>
+    <ecpp-main></ecpp-main>
 
     <!-- footer部分 -->
-    <div class="ecpp-footer-wrap"></div>
+    <ecpp-footer></ecpp-footer>
   </div>
 </template>
 
 <script>
+import ecppMain from './components/main'
+import ecppFooter from './components/footer'
+
 export default {
   data () {
     return {
       searchVal: ''
     }
+  },
+
+  components: {
+    ecppMain,
+    ecppFooter
   },
 
   methods: {
@@ -47,13 +55,16 @@ export default {
 </script>
 
 <style lang="less" scoped>
+// main-width
+@mw: 1200px;
+
 .ecpp-main{
   width: 100%;
   text-align: center;
 
   .ecpp-header-wrap{
     margin: 0 auto;
-    width: 1200px;
+    width: @mw;
     border: 1px solid #ccc;
     padding: 20px 0;
   }
@@ -64,18 +75,19 @@ export default {
   // banner部分
   .ecpp-banner-wrap {
     width: 100%;
-    min-width: 1200px;
+    min-width: @mw;
     padding: 30px 0;
     background: #3a4965;
   }
   .branner-outside-wrap{
-    width:1200px;
+    width:@mw;
     margin: 0 auto;
+    box-shadow: 0 0 20px 0 #13171D;
   }
   .banner-content{
     height: 350px;
     width:100%;
-    border: 1px solid #ccc;
+    // border: 1px solid #ccc;
   }
   .banner-nav{
     margin-top: 24px;

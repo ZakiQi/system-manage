@@ -12,6 +12,7 @@
     "ant-design-vue": "^1.6.5",
     "axios": "^0.18.0",
     "babel-polyfill": "^6.22.0",
+    "charts-preview": "^1.0.1",
     "core-js": "^3.6.5",
     "lodash": "^4.17.20",
     "normalize.css": "^8.0.0",
