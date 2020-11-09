@@ -3,7 +3,7 @@
       <!-- kpi -->
     <div class="kpi-wrap">
       <div class="kpi">
-        <kpi-box v-for="(item, key) in kpiArr" :key="key"></kpi-box>
+        <kpi-box v-for="item in 4" :status="item" :key="item"></kpi-box>
       </div>
     </div>
     <!-- 业务发展情况 -->
@@ -24,12 +24,16 @@
 
     <!-- 热门多维看板、热门自助清单 -->
     <popular-content v-for="item in hotArr" :data="item" :key="item.title"></popular-content>
+
+    <!-- 推荐看板、清单 -->
+    <recommend-conponents></recommend-conponents>
   </div>
 </template>
 
 <script>
 import kpiBox from './kpi-box'
 import popularContent from './popular-content'
+import recommendConponents from './recommend-conponents'
 export default {
   data () {
     return {
@@ -72,32 +76,6 @@ export default {
           }
         ]
       },
-      kpiArr: [
-        {
-          img: '',
-          title: '',
-          kpi: '',
-          count: ''
-        },
-        {
-          img: '',
-          title: '',
-          kpi: '',
-          count: ''
-        },
-        {
-          img: '',
-          title: '',
-          kpi: '',
-          count: ''
-        },
-        {
-          img: '',
-          title: '',
-          kpi: '',
-          count: ''
-        }
-      ],
       hotArr: [
         {
           title: '热门多维看板',
@@ -114,7 +92,8 @@ export default {
 
   components: {
     kpiBox,
-    popularContent
+    popularContent,
+    recommendConponents
   }
 }
 </script>

@@ -6,7 +6,14 @@
     <div class="hot-text-content">
       <div class="hot-name">基本客户面</div>
       <div class="hot-news">
-        <div class="left"><span>创建人：</span><span class="userName" title="业支验证账号1">业支验证账号1</span></div><div class="right"><span>浏览量：</span><span>569</span></div>
+        <div class="left">
+          <span class="hot-news-slogan">创建人：</span>
+          <span class="userName">业支验证账号1</span>
+        </div>
+        <div class="right">
+          <span class="hot-news-slogan">浏览量：</span>
+          <span>569</span>
+        </div>
       </div>
     </div>
   </div>
@@ -44,7 +51,7 @@ export default {
   color: #000000;
   letter-spacing: 0;
   text-align: left;
-  margin: 5px 0;
+  margin-top: 5px;
   overflow: hidden;
   text-overflow: ellipsis;
   -webkit-line-clamp: 2;
@@ -56,11 +63,29 @@ export default {
   line-height: 21px;
   overflow: hidden;
   font-size: 12px;
-  .left{
+  .hot-news-slogan{
+    width: 48px;
     float: left;
+    color: #BEBEBE;
+  }
+  .userName{
+    display: inline-block;
+    width: calc(~"100% - 48px");
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .left{
+    width: 60%;
+    float: left;
+    text-align: left;
+    color: #747474;
   }
   .right{
+    width: 40%;
     float:right;
+    text-align: right;
+    color: #747474;
   }
 }
 </style>

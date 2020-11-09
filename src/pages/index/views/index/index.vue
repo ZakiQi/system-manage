@@ -17,9 +17,10 @@
       <div class="branner-outside-wrap">
         <div class="banner-content">
           <!-- banner内容 -->
+          <img src="@/assets/img/banner1.png" alt="">
         </div>
         <div class="banner-nav">
-          <!-- nav -->
+          <banner-menu v-for="item in 4" :key="item"></banner-menu>
         </div>
       </div>
     </div>
@@ -35,21 +36,29 @@
 <script>
 import ecppMain from './components/main'
 import ecppFooter from './components/footer'
+import bannerMenu from './components/banner-menu'
+
+// import 'swiper/dist/css/swiper.css'
 
 export default {
   data () {
     return {
-      searchVal: ''
+      searchVal: '',
+      swiperOptions: {
+      }
     }
   },
 
   components: {
     ecppMain,
-    ecppFooter
+    ecppFooter,
+    bannerMenu
   },
 
   methods: {
-    onSearch () {}
+    onSearch () {},
+    callback () {
+    }
   }
 }
 </script>
@@ -65,7 +74,6 @@ export default {
   .ecpp-header-wrap{
     margin: 0 auto;
     width: @mw;
-    border: 1px solid #ccc;
     padding: 20px 0;
   }
   .search-input{
@@ -78,22 +86,25 @@ export default {
     min-width: @mw;
     padding: 30px 0;
     background: #3a4965;
+    overflow: hidden;
   }
   .branner-outside-wrap{
     width:@mw;
     margin: 0 auto;
-    box-shadow: 0 0 20px 0 #13171D;
   }
   .banner-content{
     height: 350px;
     width:100%;
-    // border: 1px solid #ccc;
+    box-shadow: 0 0 20px 0 #13171D;
+    img{
+      width: 100%;
+      height: 100%;
+    }
   }
   .banner-nav{
     margin-top: 24px;
     height:60px;
     width:100%;
-    border: 1px solid #ccc;
   }
 
 }
