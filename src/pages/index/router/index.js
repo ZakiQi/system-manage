@@ -9,6 +9,11 @@ const routes = [
     component: () => import('../views/index')
   },
   {
+    path: '/oldIndex',
+    name: 'oldIndex',
+    component: () => import('../views/oldIndex')
+  },
+  {
     path: '/roleManage',
     name: 'roleManage',
     component: () => import('../views/roleManage')

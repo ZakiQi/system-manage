@@ -2,6 +2,7 @@
   <div id="Main">
     <div id="nav" v-if="!$route.name">
       <router-link to="/index">首页</router-link> |
+      <router-link to="/oldIndex">旧版首页</router-link> |
       <router-link to="/roleManage">角色管理</router-link> |
       <router-link to="/moduleManage">模块管理</router-link> |
       <router-link to="/dataAuthManage">数据权限管理</router-link> |

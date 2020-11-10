@@ -13,46 +13,38 @@
     </div>
 
     <!-- banner内容 -->
-    <div class="ecpp-banner-wrap">
-      <div class="branner-outside-wrap">
-        <div class="banner-content">
-          <!-- banner内容 -->
-          <img src="@/assets/img/banner1.png" alt="">
-        </div>
-        <div class="banner-nav">
-          <banner-menu v-for="item in 4" :key="item"></banner-menu>
-        </div>
-      </div>
-    </div>
+    <ecpp-banner/>
 
     <!-- 主体部分 -->
-    <ecpp-main></ecpp-main>
+    <ecpp-main/>
 
     <!-- footer部分 -->
-    <ecpp-footer></ecpp-footer>
+    <ecpp-footer/>
   </div>
 </template>
 
 <script>
 import ecppMain from './components/main'
 import ecppFooter from './components/footer'
-import bannerMenu from './components/banner-menu'
-
-// import 'swiper/dist/css/swiper.css'
+import ecppBanner from './components/banner'
 
 export default {
   data () {
     return {
-      searchVal: '',
-      swiperOptions: {
-      }
+      searchVal: ''
+    }
+  },
+
+  computed: {
+    swiper () {
+      return this.$refs.mySwiper.swiper
     }
   },
 
   components: {
     ecppMain,
     ecppFooter,
-    bannerMenu
+    ecppBanner
   },
 
   methods: {
@@ -84,28 +76,9 @@ export default {
   .ecpp-banner-wrap {
     width: 100%;
     min-width: @mw;
-    padding: 30px 0;
+    padding: 30px 0 20px 0;
     background: #3a4965;
     overflow: hidden;
   }
-  .branner-outside-wrap{
-    width:@mw;
-    margin: 0 auto;
-  }
-  .banner-content{
-    height: 350px;
-    width:100%;
-    box-shadow: 0 0 20px 0 #13171D;
-    img{
-      width: 100%;
-      height: 100%;
-    }
-  }
-  .banner-nav{
-    margin-top: 24px;
-    height:60px;
-    width:100%;
-  }
-
 }
 </style>
