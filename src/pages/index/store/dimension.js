@@ -14,6 +14,7 @@ export default {
         url: '/data/tableData',
         data: payoad
       }).then(data => {
+        console.log(data)
         return data
       })
     }
