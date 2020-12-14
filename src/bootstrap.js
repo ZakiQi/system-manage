@@ -6,8 +6,10 @@ import Store from './store'
 // 使用Antd
 import Antd from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.css'
-Vue.use(Antd)
 
+import './assets/css/global.css'
+
+Vue.use(Antd)
 
 export default ({ router, states = {}, App }, resolve = () => {}) => {
   const store = Store(states)
@@ -17,6 +19,24 @@ export default ({ router, states = {}, App }, resolve = () => {}) => {
     router,
     render: h => h(App)
   }).$mount('#app')
+
+  const codes = [6, 7, 8, 9]
+
+  Vue.prototype.authCode = (code, type = 'some') => {
+    if (code instanceof Array) {
+      if (type === 'some') {
+        return code.some(item => {
+          return codes.includes(item)
+        })
+      } else {
+        return code.every(item => {
+          return codes.includes(item)
+        })
+      }
+    } else {
+      return codes.includes(code)
+    }
+  }
 
   // 回调函数
   resolve(app)

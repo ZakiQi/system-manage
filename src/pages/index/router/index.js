@@ -1,17 +1,46 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
 
 Vue.use(VueRouter)
 const routes = [
   {
-    path: '/',
-    component: Home
+    path: '/index',
+    name: 'index',
+    component: () => import('../views/index')
   },
   {
-    path: '/about',
-    name: 'about',
-    component: () => import('../views/about.vue')
+    path: '/oldIndex',
+    name: 'oldIndex',
+    component: () => import('../views/oldIndex')
+  },
+  {
+    path: '/roleManage',
+    name: 'roleManage',
+    component: () => import('../views/roleManage')
+  }, {
+    path: '/moduleManage',
+    name: 'moduleManage',
+    component: () => import('../views/moduleManage')
+  }, {
+    path: '/dataAuthManage',
+    name: 'dataAuthManage',
+    component: () => import('../views/dataAuthManage')
+  }, {
+    path: '/operationLog',
+    name: 'operationLog',
+    component: () => import('../views/operationLog')
+  }, {
+    path: '/systemLog',
+    name: 'systemLog',
+    component: () => import('../views/systemLog')
+  }, {
+    path: '/dataFilter',
+    name: 'dataFilter',
+    component: () => import('../views/dataFilter')
+  }, {
+    path: '/sendMessage',
+    name: 'sendMessage',
+    component: () => import('../views/sendMessage')
   }
 ]
 

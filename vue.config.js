@@ -19,7 +19,8 @@ function addStyleResource (rule) {
     .loader('style-resources-loader')
     .options({
       patterns: [
-        resolve('./src/assets/less/var.less')
+        resolve('./src/assets/less/var.less'),
+        resolve('./src/assets/less/global.less')
       ]
     })
 }
